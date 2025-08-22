@@ -1,0 +1,130 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("{{ url_for('static', filename='images/crs1.jpg') }}"); /* Background image URL */
+        background-size: 1400px 1400px; /* Adjust the width and height as needed */
+        background-repeat: no-repeat; /* Do not repeat the background image */
+        background-position: center center; /* Center the background image */
+    }
+
+    .form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #000000;
+        font-weight: bold;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 32px;
+    }
+
+    label {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    input[type='number'],
+    select {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0 20px;
+        border: 2px solid #333;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    button[type='submit'] {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type='submit']:hover {
+        background-color: #0056b3;
+    }
+
+    .typewriter {
+        display: inline-block;
+        overflow: hidden;
+        border-right: 2px solid #333;
+        white-space: nowrap;
+        margin: 0;
+        padding: 0;
+        animation: typing 3s steps(30, end) 2s infinite;
+    }
+
+    @keyframes typing {
+        0% { width: 0 }
+        50% { width: 100% }
+        100% { width: 100% }
+    }
+</style>
+
+<div class="form-container">
+    <h2>
+        <span class="typewriter">वृद्धि के लिए सबसे उपयुक्त फसल चुनें</span>
+    </h2>
+    
+    <form method="POST" action="{{ url_for('crop_prediction') }}">
+        <div class="form-group">
+            <label for="Nitrogen">Nitrogen(नाइट्रोजन):</label>
+            <input type="number" id="Nitrogen" name="nitrogen" placeholder="मान दर्ज करें (उदाहरण, ५०)" required>
+        </div>
+        <div class="form-group">
+            <label for="Phosphorous">Phosphorous(फॉस्फोरस):</label>
+            <input type="number" id="Phosphorous" name="phosphorous" placeholder="मान दर्ज करें (उदाहरण, ५०)" required>
+        </div>
+        <div class="form-group">
+            <label for="Potassium">Potassium(पोटासियम):</label>
+            <input type="number" id="Potassium" name="potassium" placeholder="मान दर्ज करें (उदाहरण, ५०)" required>
+        </div>
+        <div class="form-group">
+            <label for="ph">pH Level(पीएच स्तर):</label>
+            <input type="number" step="0.01" id="ph" name="ph" placeholder="मान दर्ज करें" required>
+        </div>
+        <div class="form-group">
+            <label for="Rainfall">Rainfall in mm(मिमी में वर्षा):</label>
+            <input type="number" step="0.01" id="Rainfall" name="rainfall" placeholder="मान दर्ज करें" required>
+        </div>
+        <div class="form-group">
+            <label for="State"><b>State(राज्य)</b></label>
+            <select onchange="print_city('state', this.selectedIndex);" id="state_select" name="state_select" class="form-control" style="font-weight: bold; color: black;" required></select>
+            <br>
+            <label for="City"><b>City(शहर)</b></label>
+            <select id="state" class="form-control" name="city_select" style="font-weight: bold; color: black;" required></select>
+        </div>
+        
+        <script>
+            print_state("state_select");
+        </script>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit">जानिए</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

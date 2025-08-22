@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-success text-white text-center">
+                    <h3 class="mb-0">Farmer Contact Form</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('add_contact') }}" method="POST">
+                        <div class="form-group">
+                            <label for="name"><i class="fa fa-user"></i> Name:</label>
+                            <input type="text" class="form-control rounded-pill" name="name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="fa fa-phone"></i> Phone Number:</label>
+                            <input type="text" class="form-control rounded-pill" name="phone" placeholder="Enter your phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="fa fa-envelope"></i> Email:</label>
+                            <input type="email" class="form-control rounded-pill" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location"><i class="fa fa-map-marker"></i> Location:</label>
+                            <input type="text" class="form-control rounded-pill" name="location" placeholder="Enter your location" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success px-4 py-2 rounded-pill">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <small>We respect your privacy. Your data is secure.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

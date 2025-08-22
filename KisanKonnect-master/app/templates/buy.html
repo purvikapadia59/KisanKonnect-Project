@@ -1,0 +1,179 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriMarket - Crops for Sale</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Define CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .crop-card {
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 300px;
+            height: auto; /* Set height to auto */
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .crop-card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .crop-image {
+            width: 100%;
+            height: 200px; /* Set a fixed height for the image */
+            object-fit: cover; /* Ensure image covers the space without distortion */
+            border-radius: 5px;
+        }
+        .crop-details {
+            margin-top: 10px;
+        }
+        .order-button {
+            margin-top: auto; /* Push the button to the bottom */
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        .order-button:hover {
+            background-color: #45a049;
+        }
+        /* Responsive grid layout */
+        .crop-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        /* Margin for h1 tag */
+        h1 {
+            margin-top: 40px;
+            font-weight: bold; /* Make the h1 tag bold */
+        }
+        /* Custom styles for search */
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 8px 40px 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+            background-color: #f1f1f1;
+            box-sizing: border-box;
+            transition: width 0.4s ease-in-out;
+        }
+        .search-input:focus {
+            width: 100%;
+            outline: none;
+        }
+        .search-icon {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            color: #777;
+            cursor: pointer;
+        }
+        .mic-icon {
+            position: absolute;
+            top: 8px;
+            right: 40px;
+            color: #777;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; margin-bottom: 20px;">कृषिबाजार - बिक्री के लिए फसलें</h1>
+    
+    <!-- Search bar -->
+    <div class="container mb-4">
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="खोजें फसलें...">
+            <i class="fas fa-search search-icon" id="searchIcon"></i>
+            <i class="fas fa-microphone mic-icon" id="micIcon"></i>
+        </div>
+    </div>
+    
+    <!-- Crop cards container -->
+    <div class="crop-cards-container">
+        {% for crop in crops %}
+        <div class="crop-card">
+            <div class="crop-card-content">
+                <h2>{{ crop.name }}</h2>
+                <img src="{{ crop.image }}" alt="{{ crop.name }}" class="crop-image">
+                <div class="crop-details">
+                    <p>{{ crop.description }}</p>
+                    <p>Price: ${{ crop.price }}</p>
+                    <p>Seller: {{ crop.seller_name }}</p>
+                </div>
+                <a href="/order/{{ crop.id }}" class="order-button">Order</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Function to filter crops based on search input
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            filterCrops();
+        });
+
+        // Search icon functionality
+        document.getElementById('searchIcon').addEventListener('click', function() {
+            filterCrops();
+        });
+
+        // Microphone functionality
+        const micIcon = document.getElementById('micIcon');
+        micIcon.addEventListener('click', function() {
+            const recognition = new window.webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript;
+                document.getElementById('searchInput').value = speechResult;
+                filterCrops();
+            };
+        });
+
+        function filterCrops() {
+            var searchValue = document.getElementById('searchInput').value.toLowerCase();
+            var crops = document.querySelectorAll('.crop-card');
+            crops.forEach(function(crop) {
+                var name = crop.querySelector('h2').textContent.toLowerCase();
+                var description = crop.querySelector('.crop-details').textContent.toLowerCase();
+                if (name.includes(searchValue) || description.includes(searchValue)) {
+                    crop.style.display = 'block';
+                } else {
+                    crop.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<style>
+  /* Styling for the middle part */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("{{ url_for('static', filename='images/p1.jpg') }}"); /* Background image URL */
+    background-size: 1350px 800px; /* Adjust the width and height as needed */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-position: center center; /* Center the background image */
+  }
+</style>
+
+<div class="container py-2 mx-auto my-50 h-10" style="margin: 9rem; border: 2px solid #ccc; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative; overflow: hidden;" id="prediction-container">
+  <div class="row">
+    <div class="col-sm py-2 py-md-3">
+      <div class="card card-body" style="justify-content: center; background-color: blanchedalmond; border-radius: 15px; padding: 20px;">
+        <p class="text-justify" id="prediction-text" style="color: black; font-size: 18px; font-family: 'Arial', sans-serif; font-weight: 600; line-height: 1.5; animation: fade-in 0.5s ease;">
+          {{ prediction }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Adjusting animation for the text container */
+    .container .card .text-justify {
+      animation: fade-in 0.5s ease;
+    }
+  </style>
+</div>
+
+<!-- JavaScript for toggling between English and Hindi -->
+<script>
+  var container = document.getElementById("prediction-container");
+  var predictionText = document.getElementById("prediction-text");
+  var isEnglish = true;
+
+  container.addEventListener("click", function() {
+    var textToTranslate = predictionText.innerText;
+    var sourceLang = isEnglish ? "en" : "hi";
+    var targetLang = isEnglish ? "hi" : "en";
+    
+    translateTextChunks(textToTranslate, sourceLang, targetLang)
+      .then(function(translatedText) {
+        predictionText.innerText = translatedText;
+        isEnglish = !isEnglish;
+      })
+      .catch(function(error) {
+        console.error("Error translating text:", error);
+      });
+  });
+
+  function translateTextChunks(text, sourceLang, targetLang) {
+    var chunkSize = 400; // Define the maximum length of each chunk
+    var promises = [];
+    for (var i = 0; i < text.length; i += chunkSize) {
+      var chunk = text.substring(i, i + chunkSize);
+      promises.push(translateChunk(chunk, sourceLang, targetLang));
+    }
+    return Promise.all(promises)
+      .then(function(translations) {
+        return translations.join('');
+      });
+  }
+
+  function translateChunk(chunk, sourceLang, targetLang) {
+    var url = "https://api.mymemory.translated.net/get?q=" + encodeURIComponent(chunk) + "&langpair=" + sourceLang + "|" + targetLang;
+    return fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data.responseStatus === 200) {
+          return data.responseData.translatedText;
+        } else {
+          throw new Error("Translation error: " + data.responseStatus);
+        }
+      });
+  }
+</script>
+
+{% endblock %}

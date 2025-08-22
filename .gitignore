@@ -1,0 +1,63 @@
+﻿# ======================================
+# PYTHON & DJANGO PROJECT .GITIGNORE
+# ======================================
+
+# --- Python Bytecode ---
+__pycache__/
+*.py[cod]
+*.class
+
+# --- Virtual Environment ---
+venv/
+env/
+ENV/
+.venv/
+
+# --- Django Stuff ---
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+
+# --- Media & Static Files ---
+media/
+staticfiles/
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.mp3
+*.wav
+*.flac
+
+# --- Local Settings ---
+local_settings.py
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- OS Generated Files ---
+.DS_Store
+Thumbs.db
+
+# --- Test & Cache Files ---
+*.cover
+*.coverage
+*.pytest_cache/
+*.tox/
+*.nox/
+*.mypy_cache/
+
+# --- Node Modules (if using React/JS frontend) ---
+node_modules/
+
+# --- Large Files ---
+*.zip
+*.rar
+*.pdf
+*.exe
+*.iso

@@ -1,0 +1,127 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<!-- Include Font Awesome for camera icon -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<style>
+  /* Styling for the middle part */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("{{ url_for('static', filename='images/p1.jpg') }}"); /* Background image URL */
+    background-size: 1350px 800px; /* Adjust the width and height as needed */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-position: center center; /* Center the background image */
+}
+  .middle-section {
+    width: 350px;
+    height: 30rem;
+    margin: 20px auto;
+    color: black;
+    border-radius: 25px;
+    padding: 20px;
+    font-weight: bold;
+    background-color: #ffffcc; /* Changed background color to light yellow */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Styling for the form and its elements */
+  .form-signin {
+    text-align: center;
+  }
+
+  .form-signin input[type="file"] {
+    display: none;
+  }
+
+  .upload-btn {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .upload-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .form-signin img {
+    margin: 20px auto;
+    display: block;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .submit-btn {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: #218838;
+  }
+</style>
+
+<br /><br />
+<h2 style="text-align: center; margin: 0; color: black; font-family: 'Arial', sans-serif; text-shadow: 0 0 10px #fff, 0 0 20px #7FFF00, 0 0 30px #7FFF00, 0 0 40px #7FFF00, 0 0 50px #7FFF00, 0 0 60px #7FFF00, 0 0 70px #7FFF00, 0 0 80px #7FFF00, 0 0 90px #7FFF00, 0 0 100px #7FFF00; animation: highlight 2s infinite;">
+  <b>अपने पौधे पर प्रभाव डालने वाली बीमारी और उसके कारण के बारे में जानें।</b>
+</h2>
+<style>
+  @keyframes highlight {
+      0% {
+          text-shadow: 0 0 10px #fff, 0 0 20px #7FFF00, 0 0 30px #7FFF00, 0 0 40px #7FFF00, 0 0 50px #7FFF00, 0 0 60px #7FFF00, 0 0 70px #7FFF00, 0 0 80px #7FFF00, 0 0 90px #7FFF00, 0 0 100px #7FFF00;
+      }
+
+      50% {
+          text-shadow: 0 0 5px #fff, 0 0 10px #7FFF00, 0 0 15px #7FFF00, 0 0 20px #7FFF00, 0 0 25px #7FFF00, 0 0 30px #7FFF00, 0 0 35px #7FFF00, 0 0 40px #7FFF00, 0 0 45px #7FFF00, 0 0 50px #7FFF00;
+      }
+
+      100% {
+          text-shadow: 0 0 10px #fff, 0 0 20px #7FFF00, 0 0 30px #7FFF00, 0 0 40px #7FFF00, 0 0 50px #7FFF00, 0 0 60px #7FFF00, 0 0 70px #7FFF00, 0 0 80px #7FFF00, 0 0 90px #7FFF00, 0 0 100px #7FFF00;
+      }
+  }
+</style>
+<br />
+<br>
+
+<div class="middle-section">
+
+  <form class="form-signin" method="post" enctype="multipart/form-data">
+    <label for="inputfile" class="upload-btn" style="font-weight: bold;"><i class="fas fa-camera"></i> Upload Picture</label>
+    <input type="file" name="file" id="inputfile" onchange="preview_image(event)">
+    <img id="output-image" class="rounded mx-auto d-block" />
+    <button class="submit-btn" type="submit" style="font-weight: bold;">जानिए</button>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function preview_image(event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var output = document.getElementById('output-image')
+      output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+
+{% endblock %}

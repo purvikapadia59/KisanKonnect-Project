@@ -1,0 +1,183 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+  /* CSS styles */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("{{ url_for('static', filename='images/f2.jpg') }}"); /* Background image URL */
+    background-size: 1350px 800px; /* Adjust the width and height as needed */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-position: center center; /* Center the background image */
+}
+  h2 {
+    text-align: center;
+    margin: 20px 0; /* Add margin bottom */
+    color: white; /* Dark gray color */
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow */
+    animation: blockEffect 1s ease-in; /* Block effect */
+}
+
+@keyframes blockEffect {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+  .form-container {
+    width: 350px;
+    margin: 0 auto 30px; /* Center horizontally and provide bottom margin */
+    padding: 20px;
+    background-color: #fff; /* White background */
+    border-radius: 25px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type='number'],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333; /* Dark gray color */
+    font-weight: bold;
+    box-sizing: border-box;
+  }
+
+  button[type='submit'] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background-color: #007bff; /* Blue button */
+    color: #fff; /* White text */
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button[type='submit']:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+
+  @keyframes popup {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+</style>
+
+<!--Form Section-->
+<h2>मिट्टी के आधार पर उर्वरक पर सलाह प्राप्त करें।</h2>
+
+<div class="form-container">
+  <form method="POST" action="{{ url_for('fert_recommend') }}">
+    <div class="form-group">
+      <label for="Nitrogen">Nitrogen(नाइट्रोजन):</label>
+      <input
+        type="number"
+        class="form-control"
+        id="Nitrogen"
+        name="nitrogen"
+        placeholder="मान दर्ज करें (उदाहरण, ५०)"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="Phosphorous">Phosphorous(फॉस्फोरस):</label>
+      <input
+        type="number"
+        class="form-control"
+        id="Phosphorous"
+        name="phosphorous"
+        placeholder="मान दर्ज करें (उदाहरण, ५०)"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="Potassium">Potassium(पोटासियम):</label>
+      <input
+        type="number"
+        class="form-control"
+        id="Potassium"
+        name="potassium"
+        placeholder="मान दर्ज करें (उदाहरण, ५०)"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="crop">Crop you want to grow</label>
+      <label for="crop">(आप कौनसी फसल उगाना चाहते हैं):</label>
+      <select
+        name="cropname"
+        class="form-control"
+        id="crop"
+        required
+      >
+        <option selected>फसल चुनें</option>
+        <option>rice</option>
+        <option>maize</option>
+        <option>chickpea</option>
+        <option>kidneybeans</option>
+        <option>pigeonpeas</option>
+        <option>mothbeans</option>
+        <option>mungbean</option>
+        <option>blackgram</option>
+        <option>lentil</option>
+        <option>pomegranate</option>
+        <option>banana</option>
+        <option>mango</option>
+        <option>grapes</option>
+        <option>watermelon</option>
+        <option>muskmelon</option>
+        <option>apple</option>
+        <option>orange</option>
+        <option>papaya</option>
+        <option>coconut</option>
+        <option>cotton</option>
+        <option>jute</option>
+        <option>coffee</option>
+      </select>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button
+        type="submit"
+        class="btn btn-info"
+      >
+      जानिए
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ऑर्डर विवरण</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .order-details {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            transition: transform 0.3s ease-in-out;
+        }
+        .order-details:hover {
+            transform: translateY(-5px);
+        }
+        .order-details h1 {
+            font-size: 28px; /* Adjust font size */
+            color: #333; /* Text color */
+            margin-bottom: 20px; /* Add some margin at the bottom */
+            text-align: center; /* Center align text */
+            text-transform: uppercase; /* Uppercase text */
+            font-weight: bold; /* Make the text bold */
+        }
+        .order-details p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .order-details img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .order-details form {
+            text-align: center;
+        }
+        .order-details input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .order-details input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-details">
+        <h1>ऑर्डर विवरण</h1>
+        <p><strong>Crop Name(फसल का नाम):</strong> {{ crop.name }}</p>
+        <p><strong>Description(विवरण):</strong> {{ crop.description }}</p>
+        <p><strong>Price(मूल्य):</strong> ${{ crop.price }}</p>
+        <img src="{{ crop.image }}" alt="{{ crop.name }}">
+        <p><strong>Seller(विक्रेता):</strong> {{ crop.seller_name }}</p>
+        <form action="/confirm_order" method="POST">
+            <input type="hidden" name="crop_id" value="{{ crop.id }}">
+            <input type="submit" value="ऑर्डर पुष्टि करें">
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

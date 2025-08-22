@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!-- banner -->
+<section class="banner_w3lspvt" id="home">
+    <div class="csslider infinity" id="slider1">
+        <div class="banner-top">
+            <div class="overlay">
+                <div class="container">
+                    <div class="w3layouts-banner-info text-center">
+                        <h3 class="text-wh">KisanKonnect</h3>
+                        <h4 class="text-wh mx-auto my-4" style="font-family: 'Noto Sans Devanagari', sans-serif; font-feature-settings: 'liga' 1, 'calt' 1;"><b>खेती में तेज़ी लाओ, और हर कदम पर सही फैसले लो|</b></h4>
+                        <h4 class="text-wh mx-auto my-4"><b>Speed up farming and make the right decisions at every step.</b></h4>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //banner -->
+
+<!-- Core values -->
+<section class="core-value py-5">
+    <div class="container py-md-4">
+        <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="10000">
+            <div class="carousel-inner core-grids">
+                <div class="carousel-item active" style="background-color: #f7f9cf; height: 350px;">
+                    <div class="row align-items-center"> <!-- Align items vertically -->
+                        <div class="col-lg-6 core-left">
+                            <img src="{{ url_for('static', filename='images/bg1.webp') }}" class="img-fluid d-block mx-auto" alt="" style="max-width: 100%; height: 350px;">
+                        </div>
+                        <div class="col-lg-6 core-right">
+                            <h3 class="mt-4">Improving Agriculture, Improving Lives, Cultivating Crops To Make Farmers Increase Profit.</h3>
+                            <p class="mt-0">Our platform provides farmers with everything they need for successful farming. We help with soil testing, suggest the right crops and fertilizers, detect plant diseases, and even offer a platform to buy and sell agricultural goods. Our goal is to make farming easier and more profitable for everyone involved.</p>
+                        </div>
+                    </div>
+                </div>                
+                <div class="carousel-item" style="background-color: #f7f9cf; height: 350px;">
+                    <div class="row align-items-center"> <!-- Align items vertically -->
+                        <div class="col-lg-6 core-left">
+                            <img src="{{ url_for('static', filename='images/bg2.webp') }}" class="img-fluid d-block mx-auto" alt="" style="max-width: 100%; height: auto;">
+                        </div>
+                        <div class="col-lg-6 core-right">
+                            <h3 class="mt-4">कृषि में सुधार, जीवनों में सुधार, किसानों के लाभ को बढ़ाने के लिए, हम कृषि क्षेत्र में सुधार कर रहे हैं।"</h3>
+                            <p class="mt-0">
+                                हमारा प्लेटफ़ॉर्म किसानों को सफल खेती के लिए सभी आवश्यक उपकरण प्रदान करती है। हम मिट्टी का परीक्षण करते हैं, सही फसलों और उर्वरकों की सलाह देते हैं, पौधों के रोगों को पहचानते हैं, और यहां खेती संबंधित सामग्री को खरीदने और बेचने का एक मंच भी प्रदान करते हैं। हमारा लक्ष्य है कि सभी संबंधित व्यक्तियों के लिए खेती को सरल और लाभकारी बनाना।</p>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev" style="left: -50px;">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next" style="right: -50px;">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- //core values -->
+
+{% endblock %}

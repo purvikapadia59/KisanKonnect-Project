@@ -1,0 +1,94 @@
+{% extends 'layout.html' %} 
+{% block body %}
+
+<style>
+  /* Custom styling for the container */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("{{ url_for('static', filename='images/f2.jpg') }}"); /* Background image URL */
+    background-size: cover; /* Adjusts the background image size to cover the entire page */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-position: center center; /* Center the background image */
+  }
+  .container-custom {
+    margin: 9rem auto; /* Center the container vertically */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+    background-color: #f5f5dc; /* Blanched almond background */
+    font-family: 'Arial', sans-serif; /* Professional font */
+  }
+  /* Custom styling for the card */
+  .card-custom {
+    border: none; /* Remove border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+    background-color: #fff; /* White background */
+    border-radius: 10px;
+  }
+  /* Custom styling for the text */
+  .text-custom {
+    font-size: 20px;
+    color: #000; /* Black text color */
+    text-align: justify;
+    padding: 0 15px; /* Add padding for better readability */
+    line-height: 1.6; /* Set line height for proper spacing */
+    font-family: 'Arial', sans-serif; /* Use Arial font */
+    font-weight: 300; /* Semi-bold */
+    cursor: pointer; /* Add cursor pointer */
+    transition: all 0.3s; /* Add transition effect */
+  }
+  .text-custom:hover {
+    color: darkgreen; /* Change color on hover */
+  }
+  /* Text animation */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .fade-in {
+    animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
+  }
+</style>
+
+<div class="container container-custom py-2 mx-auto">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card card-custom text-center">
+        <div class="card-body">
+          <!-- Add id to identify the recommendation text -->
+          <p id="recommendation" class="text-custom fade-in" onclick="toggleTranslation(this)">{{ recommendation }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let isEnglish = true;
+  let originalText = '';
+
+  function toggleTranslation(element) {
+    if (isEnglish) {
+      originalText = element.textContent; // Store original English text
+      // Get the text content of the recommendation
+      const recommendationText = element.textContent;
+      // Translate the recommendation text using Google Translate API
+      fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(recommendationText)}&langpair=en|hi`)
+        .then(response => response.json())
+        .then(data => {
+          // Update the text content with translated text
+          element.textContent = data.responseData.translatedText;
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+      // Revert back to the original English text
+      element.textContent = originalText;
+    }
+    // Toggle translation mode
+    isEnglish = !isEnglish;
+  }
+</script>
+
+{% endblock %}

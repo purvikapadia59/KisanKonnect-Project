@@ -1,0 +1,138 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Rotation Recommendation</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            background-color: lightyellow;
+        }
+
+        .flash-card {
+            max-width: 700px;
+            height: 400px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border: 2px solid #007bff; /* Dark green border */
+            perspective: 1000px;
+        }
+
+        .flash-card-inner {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flash-card-front,
+        .flash-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 10px;
+            color: #000; /* Black text color */
+        }
+
+        .flash-card-front {
+            background: url('{{ url_for('static', filename='images/f1.jpg') }}') center center no-repeat;
+            background-size: cover;
+            font-weight: bold;
+            font-size: 36px; /* Larger font size */
+            transform: rotateY(0deg);
+        }
+
+        .flash-card-back {
+            background-color: #28a745;
+            color: #fff;
+            font-size: 18px; /* Smaller font size */
+            transform: rotateY(180deg);
+        }
+
+        .crop-name,
+        .recommendation {
+            margin: 20px 0;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .go-back-link {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .go-back-link:hover {
+            text-decoration: underline;
+        }
+
+        .flash-card .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .flash-card .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Flipping Animation */
+        .flash-card:hover .flash-card-inner {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flash-card">
+            <div class="flash-card-inner">
+                <div class="flash-card-front">
+                    <div class="crop-name">{{ crop }}</div>
+                    <a href="#" class="btn btn-primary">जानकारी प्राप्त करें</a>
+                </div>
+                <div class="flash-card-back">
+                    <div class="recommendation">
+                        {{ recommendation }}
+                        <button onclick="speakText('{{ recommendation }}')" class="btn btn-success">ऑडियो सुनें</button>
+                    </div>
+                    <a href="/" class="go-back-link">वापस जाएं</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Speech Synthesis -->
+    <script>
+        function speakText(text) {
+            var msg = new SpeechSynthesisUtterance();
+            msg.lang = 'hi-IN'; // Set the language to Hindi (India)
+            msg.text = text;
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

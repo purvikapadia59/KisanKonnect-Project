@@ -1,0 +1,177 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+    /* Styling for the Kisan Yojna section */
+    #kisan-yojna {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    #kisan-yojna h2 {
+      color: #4CAF50;
+      font-size: 50px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold; /* Make the heading bold */
+      position: relative; /* Position relative for stickers */
+    }
+  
+    #kisan-yojna h2::after {
+      content: 'Schemes'; /* Add a sticker or label */
+      background-color: #FFD700; /* Yellow background for the sticker */
+      color: #000; /* Black text color for the sticker */
+      padding: 5px 10px; /* Padding for the sticker */
+      border-radius: 5px; /* Rounded corners for the sticker */
+      position: absolute; /* Position the sticker */
+      top: -20px; /* Adjust the position of the sticker */
+      right: -20px; /* Adjust the position of the sticker */
+      font-size: 20px; /* Adjust the font size of the sticker */
+      transform: rotate(45deg); /* Rotate the sticker */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add shadow to the sticker */
+    }
+
+    /* Style for the scheme boxes */
+    #kisan-yojna ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #kisan-yojna li {
+      background-color: #ffffff;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    #kisan-yojna li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #kisan-yojna li a {
+      text-decoration: none;
+      color: darkgreen;
+      font-weight: bold;
+    }
+
+    /* Style for the detailed information */
+    .scheme-details {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    /* Style for the read more link */
+    .read-more {
+      color: blue;
+      cursor: pointer;
+    }
+
+    /* Style for the expanded content */
+    .expanded-content {
+      display: none;
+    }
+
+    /* Style for the read less link */
+    .read-less {
+      color: blue;
+      cursor: pointer;
+    }
+</style>
+
+<!-- Content for Kisan Yojna -->
+<section id="kisan-yojna">
+    <h2>*******************किसानों के लिए योजनाएं*******************</h2>
+    <ul>
+        <li>
+            <a href="https://pmkisan.gov.in/"><img src="{{ url_for('static', filename='images/y1.jpg') }}" style="height: 400px; width: 100%;"></a>
+            <div class="scheme-details">
+                <h3><a href="https://pmkisan.gov.in/">Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)</a></h3>
+                <p>प्रधानमंत्री किसान सम्मान निधि (पीएम-किसान) भारत सरकार की महत्वपूर्ण पहल है, <span class="expanded-content">जो देश भर के छोटे और सीमांत किसानों की आर्थिक स्थिति को सुधारने के लिए डिज़ाइन की गई है। प्रमुख उद्देश्य यह है कि प्रत्यक्ष आय सहायता प्रदान करना, पीएम-किसान हर साल योग्य किसानों को ₹6,000 की तीन बराबर किस्तों में प्रदान करता है। इस वित्तीय सहायता को किसानों के बैंक खातों में सीधे हस्तांतरित किया जाता है, जो किसानों के कृषि आवश्यकताओं और घरेलू खर्चों को पूरा करने में मदद करता है। डायरेक्ट लाभ अंतरण (डीबीटी) मोड के माध्यम से लागू किया गया, यह योजना राज्य सरकारों और केंद्र शासित प्रदेशों पर निर्भर करती है ताकि प्रत्यक्ष वितरण को निर्भर और निष्पक्ष बनाया जा सके। कृषि संबंधी पीड़ा को कम करने, किसानों के जीवनाधार को बढ़ाने और कृषि उत्पादकता को बढ़ाने में इसका परिवर्तनात्मक प्रभाव, प्रधानमंत्री किसान सम्मान निधि किसान समुदाय के लिए एक आशा की रोशनी के रूप में सामने आती है, समावेशी विकास और ग्रामीण समृद्धि को निर्मित करती है।
+                </span> <span class="read-more">Read more</span> <span class="read-less">Read less</span></p>
+            </div>
+        </li>
+        <li>
+            <a href="https://pmfby.gov.in/"><img src="{{ url_for('static', filename='images/y2.jpg') }}" style="height: 400px; width: 100%;"></a>
+            <div class="scheme-details">
+                <h3><a href="https://pmfby.gov.in/">Pradhan Mantri Fasal Bima Yojana (PMFBY)</a></h3>
+                <p>प्रधानमंत्री फसल बीमा योजना (पीएमएफबीवाई) एक फसल बीमा योजना है <span class="expanded-content">जो किसानों को प्राकृतिक आपदाओं के कारण होने वाले फसल के नुकसान या हानि के मामले में वित्तीय सहायता प्रदान करती है। इस योजना के तहत, किसानों को फसल नुकसान के लिए बीमा किया जाता है और यदि किसी प्राकृतिक आपदा के कारण उनकी फसलों में कोई हानि होती है, तो उन्हें आर्थिक मदद प्रदान की जाती है। यह योजना फसलों की सुरक्षा को बढ़ाने के लिए महत्वपूर्ण योजना है, जो किसानों को आत्मनिर्भरता की दिशा में आगे बढ़ने में मदद करती है।
+                </span> <span class="read-more">Read more</span> <span class="read-less">Read less</span></p>
+            </div>
+        </li>
+        <li>
+            <a href="https://pmksy.gov.in/"><img src="{{ url_for('static', filename='images/y3.jpg') }}" style="height: 400px; width: 100%;"></a>
+            <div class="scheme-details">
+                <h3><a href="https://pmksy.gov.in/">Pradhan Mantri Krishi Sinchai Yojana (PMKSY)</a></h3>
+                <p>प्रधानमंत्री कृषि सिंचाई योजना (पीएमकेएसवाई) भारत सरकार की एक महत्वपूर्ण पहल है, <span class="expanded-content">जो कृषि सिंचाई क्षेत्र में अधिक निवेश के माध्यम से कृषि उत्पादन को बढ़ावा देने के लिए डिज़ाइन की गई है। इसका मुख्य उद्देश्य है सिंचाई के माध्यम से कृषि उत्पादन को बढ़ावा देना और किसानों को आर्थिक रूप से मजबूत करना। यह योजना भारतीय कृषि को अधिक जलसंप्रदान और सिंचाई सुविधाओं के माध्यम से मजबूत करने के लिए डिज़ाइन की गई है, जिससे कृषि उत्पादन में वृद्धि हो सके और किसानों को अधिक आय वृद्धि की संभावना हो।
+                </span> <span class="read-more">Read more</span> <span class="read-less">Read less</span></p>
+            </div>
+        </li>
+        <li>
+            <a href="https://dbtagriculture.bihar.gov.in/"><img src="{{ url_for('static', filename='images/y5.png') }}" style="height: 400px; width: 100%;"></a>
+            <div class="scheme-details">
+                <h3><a href="https://dbtagriculture.bihar.gov.in/">Direct Benefit Transfer in Agriculture (DBT)</a></h3>
+                <p>कृषि में सीधे लाभ हस्तांतरण (डीबीटी) एक डिजिटल मॉडल है, <span class="expanded-content">जो सरकारी सहायता को किसानों और किसानों के खातों में सीधे हस्तांतरित करता है। इसका उद्देश्य आर्थिक प्रगति को सुनिश्चित करना है, साथ ही उनकी संबलता को बढ़ाना है, जो उन्हें अपनी कृषि उत्पादन की बेहतरीन कीमत प्राप्त करने में मदद करता है।
+                </span> <span class="read-more">Read more</span> <span class="read-less">Read less</span></p>
+            </div>
+        </li>
+    </ul>
+</section>
+
+<script>
+    // JavaScript to toggle the expanded content
+    document.querySelectorAll('.scheme-details').forEach(item => {
+        const expandedContent = item.querySelector('.expanded-content');
+        const readMoreLink = item.querySelector('.read-more');
+        const readLessLink = item.querySelector('.read-less');
+
+        readMoreLink.addEventListener('click', () => {
+            expandedContent.style.display = 'inline';
+            readMoreLink.style.display = 'none';
+            readLessLink.style.display = 'inline';
+        });
+
+        readLessLink.addEventListener('click', () => {
+            expandedContent.style.display = 'none';
+            readMoreLink.style.display = 'inline';
+            readLessLink.style.display = 'none';
+        });
+
+        // Initially hide Read Less and expanded content
+        expandedContent.style.display = 'none';
+        readLessLink.style.display = 'none';
+    });
+
+    // JavaScript to toggle between Read More and Read Less
+    document.querySelectorAll('.read-more').forEach(item => {
+        item.addEventListener('click', event => {
+            const parent = event.target.parentElement;
+            const expandedContent = parent.querySelector('.expanded-content');
+            const readMoreLink = parent.querySelector('.read-more');
+            const readLessLink = parent.querySelector('.read-less');
+
+            expandedContent.style.display = 'inline';
+            readMoreLink.style.display = 'none';
+            readLessLink.style.display = 'inline';
+        });
+    });
+
+    document.querySelectorAll('.read-less').forEach(item => {
+        item.addEventListener('click', event => {
+            const parent = event.target.parentElement;
+            const expandedContent = parent.querySelector('.expanded-content');
+            const readMoreLink = parent.querySelector('.read-more');
+            const readLessLink = parent.querySelector('.read-less');
+
+            expandedContent.style.display = 'none';
+            readMoreLink.style.display = 'inline';
+            readLessLink.style.display = 'none';
+        });
+    });
+</script>
+
+{% endblock %}

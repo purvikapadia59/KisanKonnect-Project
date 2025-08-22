@@ -1,0 +1,206 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .payment-options-container {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        .payment-options {
+            display: none;
+        }
+        .payment-options.show {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .payment-methods {
+            display: flex;
+            flex-direction: column; /* Align options vertically */
+            align-items: center; /* Center horizontally */
+        }
+        .payment-method {
+            margin: 10px;
+            display: flex; /* Align label and input horizontally */
+            align-items: center; /* Center vertically */
+        }
+        .payment-method label {
+            cursor: pointer;
+            display: inline-block;
+            padding-left: 10px;
+            width: 200px; /* Adjust width for alignment */
+            text-align: left; /* Align text to the left */
+        }
+        .payment-method input[type="radio"] {
+            display: none;
+        }
+        .payment-method img {
+            max-width: 100px;
+            height: auto;
+        }
+        .thanks-message {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #333;
+        }
+        .whatsapp-msg {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        /* Custom radio buttons */
+        .payment-method input[type="radio"] + span {
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+            display: inline-block;
+            line-height: 1.5;
+        }
+        .payment-method input[type="radio"] + span:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #007bff; /* Border color */
+            border-radius: 50%; /* Make it a circle */
+            transition: background-color 0.3s ease;
+        }
+        .payment-method input[type="radio"]:checked + span:before {
+            background-color: #007bff; /* Circle color when selected */
+        }
+        .payment-method input[type="radio"]:checked + span:after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 8px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            display: block;
+        }
+        .centered {
+            display: flex;
+            justify-content: center;
+        }
+
+        .centered-text {
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container">      
+        <h2 class="font-weight-bold centered-text">कृपया पेमेंट के लिए आगे बढ़ें</h2>
+        
+        <!-- Payment Options Container -->
+        <div class="payment-options-container">
+            <!-- Payment Options -->
+            <div class="payment-options" id="paymentOptions">
+                <h3 class="mt-4">पेमेंट का तरीका चुनें</h3>
+                <div class="payment-methods">
+                    <!-- Payment Method 1 - Cash on Delivery -->
+                    <div class="payment-method">
+                        <label>
+                            <input type="radio" name="payment" value="cod" checked>
+                            <span>Cash on Delivery</span>
+                        </label>
+                    </div>
+                    <!-- Payment Method 2 - Google Pay -->
+                    <div class="payment-method">
+                        <label>
+                            <input type="radio" name="payment" value="googlepay">
+                            <span>Google Pay</span>
+                        </label>
+                    </div>                
+                    <!-- Payment Method 3 - Card -->
+                    <div class="payment-method">
+                        <label>
+                            <input type="radio" name="payment" value="card">
+                            <span>Card</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proceed to Payment Button -->
+        <button onclick="showPaymentOptions()" class="btn btn-primary">
+            पेमेंट करें</button>
+
+        <!-- Done Button (After Payment Method Selection) -->
+        <div class="centered">
+            <button onclick="sendMessage()" class="btn btn-success" style="display:none;">Done</button>
+        </div>
+
+        <!-- Customized Thank You Message -->
+        <div class="thanks-message" id="thankYouMessage" style="display:none;">
+            <p id="selectedPaymentText"></p>
+            <p>
+                कृपया WhatsApp पर अपना पता भेजें:</p>
+            <a href="#" id="whatsappLink" class="whatsapp-msg" target="_blank">
+                WhatsApp के माध्यम से पता भेजें</a><br><br>
+                <p style="font-size: 30px; font-weight: bold; color: black;">खरीदारी के लिए धन्यवाद, फिर से आइएगा!!!</p>
+        </div>
+    </div>
+
+    <script>
+        function showPaymentOptions() {
+            var paymentOptions = document.getElementById('paymentOptions');
+            paymentOptions.classList.add('show');
+            var proceedButton = document.querySelector('.btn-primary');
+            var doneButton = document.querySelector('.btn-success');
+            proceedButton.style.display = 'none';
+            doneButton.style.display = 'block';
+        }
+
+        function sendMessage() {
+            var selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+            var selectedPaymentText = document.getElementById('selectedPaymentText');
+            var whatsappLink = document.getElementById('whatsappLink');
+            
+            if (selectedPayment === 'cod') {
+                selectedPaymentText.textContent = 'I have selected Cash on Delivery payment method.';
+            } else if (selectedPayment === 'googlepay') {
+                selectedPaymentText.textContent = 'I have selected Google Pay payment method.';
+            } else if (selectedPayment === 'card') {
+                selectedPaymentText.textContent = 'I have selected Card payment method.';
+            }
+            
+            // Customize the WhatsApp message based on the selected payment
+            var whatsappMessage = encodeURIComponent(selectedPaymentText.textContent);
+            whatsappLink.href = 'https://wa.me/7066845631?text=' + whatsappMessage;
+            
+            var thankYouMessage = document.getElementById('thankYouMessage');
+            thankYouMessage.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

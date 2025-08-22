@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("{{ url_for('static', filename='images/crs1.jpg') }}"); /* Background image URL */
+        background-size: 1400px 1400px; /* Adjust the width and height as needed */
+        background-repeat: no-repeat; /* Do not repeat the background image */
+        background-position: center center; /* Center the background image */
+    }
+
+    /* Custom styling for the container */
+    .container-custom {
+        margin: 8rem auto; /* Center the container vertically */
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+        background-color: #f8f9fa; /* Light gray background */
+        font-family: 'Arial', sans-serif; /* Professional font */
+    }
+
+    /* Custom styling for the card */
+    .card-custom {
+        border: none; /* Remove border */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+        background-color: #fff; /* White background */
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out; /* Add transition effect on hover */
+    }
+
+    /* Apply scale transformation on hover */
+    .card-custom:hover {
+        transform: scale(1.05);
+    }
+
+    /* Custom styling for the text */
+    .text-custom {
+        font-size: 32px; /* Increased font size */
+        font-weight: bold;
+        color: #333; /* Dark text color */
+        text-align: center;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add text shadow */
+    }
+
+    /* Custom styling for the emphasis text */
+    .emphasis {
+        color: darkgreen; /* Blue color for emphasis */
+        font-style: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text shadow */
+        cursor: pointer; /* Add pointer cursor for indicating clickability */
+        transition: all 0.3s ease-in-out; /* Add transition effect */
+    }
+    
+    .emphasis:hover {
+        transform: scale(1.1); /* Scale the text on hover */
+        color: forestgreen; /* Change color on hover */
+    }
+    
+
+    /* Custom styling for the container background color */
+    .container-custom {
+        background-color: #e6ffe6; /* Light green background color */
+    }
+</style>
+
+<div class="container container-custom py-4 mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card card-custom text-center">
+                <div class="card-body">
+                    <h1 class="text-custom">You should grow <span class="emphasis">{{ prediction }}</span> in your farm</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.emphasis').click(function () {
+            var word = $(this).text();
+            var url = "https://translate.google.com/#view=home&op=translate&sl=en&tl=hi&text=" + encodeURIComponent(word);
+            window.open(url, '_blank'); // Open Google Translate in a new tab
+        });
+    });
+</script>
+
+{% endblock %}

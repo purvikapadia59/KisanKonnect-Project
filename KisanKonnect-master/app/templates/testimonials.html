@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!-- Testimonials -->
+<style>
+    body{
+        background-color: #FEF9E7;
+    }
+</style>
+<section class="testimonials py-5">
+    <div class="container py-md-4">
+        <h3 class="heading mb-sm-5 mb-4 text-center highlight-heading">Testimonials(प्रशंसापत्र)</h3>
+        <div id="carouselTestimonials" class="carousel slide bg-light" data-ride="carousel" data-interval="10000" style="border-radius: 10px;">
+            <div class="carousel-inner" style="background-color: #FFDAB9;">
+                <div class="carousel-item active" style="height: 300px;">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-6 testimonial-left">
+                            <img src="{{ url_for('static', filename='images/t (1).jpeg') }}" class="img-fluid" alt="Testimonial 1" style="border-radius: 10px; width: 100%; height: 300px;">
+                        </div>
+                        <div class="col-lg-6 testimonial-right">
+                            <p class="mt-0 text-dark" style="font-size: 18px; text-align: left; margin-left: -15px;">"किसानकनेक्ट ने मेरे किसानी जीवन को नई ऊँचाई पर ले जाने में मदद की है। इससे मेरे उत्पादन में वृद्धि हुई है और मैं अब अधिक अनुभवी महसूस कर रहा हूँ। इसके साथ ही,किसानकनेक्ट के माध्यम से मुझे मेरे खेतों की मिट्टी का परीक्षण करने का अवसर मिला,जिससे मैंने सही तरह की खाद का चयन कर अपनी खेती को सफलतापूर्वक बनाया।"-रामदेव चौधरी(उत्तर प्रदेश)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height: 300px;">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-6 testimonial-left">
+                            <img src="{{ url_for('static', filename='images/t (2).jpeg') }}" class="img-fluid" alt="Testimonial 2" style="border-radius: 10px; width: 100%; height: 300px;">
+                        </div>
+                        <div class="col-lg-6 testimonial-right">
+                            <p class="mt-0 text-dark" style="font-size: 18px; text-align: left; margin-left: -15px;">
+                                "किसानकनेक्ट ने मुझे किसानी के क्षेत्र में और अधिक जानकारी, नई तकनीकों और सरकारी योजनाओं की सही जानकारी प्राप्त करने में मदद की है। उनके साथ, मैं अब अपनी फसलों के बारे में सटीक जानकारी प्राप्त कर सकता हूँ और उन्हें स्वस्थ रखकर अधिक उत्पादन करने में सक्षम हूँ।"-श्यामलाल रावत(उत्तर प्रदेश)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height: 300px;">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-6 testimonial-left">
+                            <img src="{{ url_for('static', filename='images/t (3).jpeg') }}" class="img-fluid" alt="Testimonial 3" style="border-radius: 10px;width: 100%; height: 300px;">
+                        </div>
+                        <div class="col-lg-6 testimonial-right">
+                            <p class="mt-0 text-dark" style="font-size: 18px; text-align: left; margin-left: -15px;">
+                                "किसानकनेक्ट ने मेरे किसानी जीवन को नई दिशा दी है। उनके विशेषज्ञ सलाह और तकनीकी सहायता के साथ, अब मैं अपनी फसलों को बेहतर तरीके से देखभाल करता हूँ और उन्हें अधिक सफल बनाने के लिए नए और उन्नत तरीके अपना रहा हूँ। इसके साथ ही, किसानकनेक्ट की खरीद और बिक्री सुविधा ने मुझे अपने उत्पादों को अधिक लोगों तक पहुंचाने में मदद की है।" - राजेश तिवारी (उत्तर प्रदेश)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height: 300px;">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-6 testimonial-left">
+                            <img src="{{ url_for('static', filename='images/t (4).jpeg') }}" class="img-fluid" alt="Testimonial 4" style="border-radius: 10px;width: 100%; height: 300px;">
+                        </div>
+                        <div class="col-lg-6 testimonial-right">
+                            <p class="mt-0 text-dark" style="font-size: 18px; text-align: left; margin-left: -15px;">
+                                "किसानकनेक्ट की सेवाओं ने मुझे फसलों के लिए सही बीज, उपाय, और खाद की सलाह दी है। इससे मेरी फसलों की बिक्री बढ़ी है और मुझे अधिक मुनाफा हो रहा है।"-सतीश गुप्ता
+                                (उत्तर प्रदेश)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height: 300px;">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-6 testimonial-left">
+                            <img src="{{ url_for('static', filename='images/t (5).jpeg') }}" class="img-fluid" alt="Testimonial 5" style="border-radius: 10px;width: 100%; height: 300px;">
+                        </div>
+                        <div class="col-lg-6 testimonial-right">
+                            <p class="mt-0 text-dark" style="font-size: 18px; text-align: left; margin-left: -15px;">
+                                "किसानकनेक्ट ने मेरे किसान जीवन को पूरी तरह से बदल दिया है। उनकी सेवाओं से मुझे अब फसलों की बेहतर देखभाल का मौका मिल रहा है। खाद और उपाय का सही चयन करने में मदद मिली है और मेरा उत्पादन भी बढ़ा है। अब मैं अपने उत्पादों को बाजार में बेचकर अधिक लाभ कमा सकता हूँ, जिससे मेरा और मेरे परिवार का आर्थिक स्थिति मजबूत हो गया है।"-मुकेश चौधरी(उत्तर प्रदेश)</p>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <a class="carousel-control-prev" href="#carouselTestimonials" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselTestimonials" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- //Testimonials -->
+{% endblock %}
